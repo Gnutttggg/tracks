@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="website.css">
+    <link rel="stylesheet" href="dropdowns2.css"> <!-- Link to dropdowns.css -->
+    <link rel="stylesheet" href="filters.css">
+    <link rel="stylesheet" href="signup.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <meta charset="UTF-8">
+    <title>Record something.</title>
+
+  </head>
+
+<h2 id="title">Tracks</h2>
+
+
+  <body>
+    <div class="filteroverlay"></div>
+    <div class="starredoverlay"></div>
+   
+    <div class="button-container">
+      <button id="recordButton"><i class="fas fa-microphone"></i></button>
+    </div>
+    <button id="bookmarkButton"><i class="fas fa-bookmark"></i></button>
+    <button id="bookmarkDemoButton">&#9658</button>
+
+    <div id="overlay"></div>
+
+    <div id="trackOverlay"></div>
+    <div id="chooseFilterOverlay"></div>
+
+    <div id="recordButtonOverlay"></div>
+<button id="showStarredButton">
+  <i class="star-icon">&#9734;</i>
+  <span class="button-label">Starred Tracks</span>
+</button>
+
+
+<audio id="audioPlayer" controls controlsList="nodownload"></audio>
+
+
+<audio id="gridAudioPlayer" controls controlsList="nodownload"></audio>
+
+
+<div class="volume-control">
+  <span class="speaker-symbol fas fa-volume-up"></span>  
+  <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="1">
+</div>
+
+<audio id="demoPlayer" controls></audio>
+
+
+<style>
+    #demoPlayer::-webkit-media-controls-play-button,
+    #demoPlayer::-webkit-media-controls-mute-button {
+        display: none;
+
+    }
+      #demoPlayer::-webkit-media-controls-overflow-button {
+        transform: translateY(-100%); /* Adjust this value as needed */
+    }
+</style>
+
+
+    
+
+
+
+
+    <div class="container">
+      </div>
+    </div>
+
+<style>
+  #timer,
+  #recStart,
+  #recStop {
+    color: white;
+  }
+</style>
+    </div>
+ 
+    <div id="recStart"></div>
+    <div id="recStop"></div>
+
+<h3 id="uploadHeading"></h3>
+
+<div class="allfilters">
+  <h2 id="filterHeading">Find tracks</h2>
+<h1 id="specificFilterHeading">Chord Progression: <span class="question-icon">?</span></h1>
+
+
+<div class="intro-container">
+
+<div class="rhythmfilter-container">
+
+<select id="rhythmfilter">
+  <option value=""></option>
+  <option value="I">I</option>
+  <option value="i">i</option>
+  <option value="II">II</option>
+  <option value="ii">ii</option>
+  <option value="III">III</option>
+  <option value="iii">iii</option>
+  <option value="IV">iv</option>
+  <option value="V">V</option>
+  <option value="v">v</option>
+  <option value="VI">VI</option>
+  <option value="vi">vi</option>
+  <option value="VII">VII</option>
+  <option value="vii">vii</option>
+</select>
+</div>
+<div class="intensityfilter-container">
+
+<select id="intensityfilter">
+  <option value=""></option>
+  <option value="I">I</option>
+  <option value="i">i</option>
+  <option value="II">II</option>
+  <option value="ii">ii</option>
+  <option value="III">III</option>
+  <option value="iii">iii</option>
+  <option value="IV">iv</option>
+  <option value="V">V</option>
+  <option value="v">v</option>
+  <option value="VI">VI</option>
+  <option value="vi">vi</option>
+  <option value="VII">VII</option>
+  <option value="vii">vii</option>
+</select>
+</div>
+<div class="colorfilter-container">
+
+<select id="colorfilter">
+  <option value=""></option>
+  <option value="I">I</option>
+  <option value="i">i</option>
+  <option value="II">II</option>
+  <option value="ii">ii</option>
+  <option value="III">III</option>
+  <option value="iii">iii</option>
+  <option value="IV">iv</option>
+  <option value="V">V</option>
+  <option value="v">v</option>
+  <option value="VI">VI</option>
+  <option value="vi">vi</option>
+  <option value="VII">VII</option>
+  <option value="vii">vii</option>
+</select>
+</div>
+
+
+
+<div class="instrumentfilter-container">
+
+<select id="instrumentfilter">
+  <option value=""></option>
+  <option value="I">I</option>
+  <option value="i">i</option>
+  <option value="II">II</option>
+  <option value="ii">ii</option>
+  <option value="III">III</option>
+  <option value="iii">iii</option>
+  <option value="IV">iv</option>
+  <option value="V">V</option>
+  <option value="v">v</option>
+  <option value="VI">VI</option>
+  <option value="vi">vi</option>
+  <option value="VII">VII</option>
+  <option value="vii">vii</option>
+
+</select>
+</div>
+   </div>
+
+<div id="chordFiltersContainer"></div>
+
+
+
+<h2 id="generalFilterHeading">Genre(s):</h2>
+<div class="genrefilter-container">
+
+<select id="genreselect">
+  <option value="">All Genres</option>
+  <option value="RnB">RnB</option>
+  <option value="Rock">Rock</option>
+  <option value="Pop">Pop</option>
+  <option value="Hip-Hop">Hip-Hop</option>
+  <option value="Trap">Trap</option>
+  <option value="Electronic">Electronic</option>
+  <option value="Reggae">Reggae</option>
+  <option value="Latin">Latin</option>
+  <option value="Funk/Soul">Funk/Soul</option>
+  <option value="Country">Country</option>
+  <option value="Afro Beat">Afro Beat</option>
+  <option value="Folk">Folk</option>
+  <option value="Blues">Blues</option>
+
+
+  <option value="Boom Bap">Boom Bap</option>
+  <option value="Indie">Indie</option>
+  <option value="Drill">Drill</option>
+  <option value="Lofi">Lofi</option>
+  <option value="Grime">Grime</option>
+  <option value="Metal">Metal</option>
+  <option value="Dance Hall">Dance Hall</option>
+  <option value="Trip Hop">Trip Hop</option>
+  
+  <option value="Two Step">Two Step</option>
+  <option value="Dubstep">Dubstep</option>
+
+</select>
+</div>
+<div class="genrefilter-container2">
+
+<select id="genreselect2">
+  <option value=""></option>
+  <option value="RnB">RnB</option>
+  <option value="Rock">Rock</option>
+  <option value="Pop">Pop</option>
+  <option value="Hip-Hop">Hip-Hop</option>
+  <option value="Trap">Trap</option>
+  <option value="Electronic">Electronic</option>
+  <option value="Reggae">Reggae</option>
+  <option value="Latin">Latin</option>
+  <option value="Funk/Soul">Funk/Soul</option>
+  <option value="Country">Country</option>
+  <option value="Afro Beat">Afro Beat</option>
+  <option value="Folk">Folk</option>
+  <option value="Blues">Blues</option>
+
+
+  <option value="Boom Bap">Boom Bap</option>
+  <option value="Indie">Indie</option>
+  <option value="Drill">Drill</option>
+  <option value="Lofi">Lofi</option>
+  <option value="Grime">Grime</option>
+  <option value="Metal">Metal</option>
+  <option value="Dance Hall">Dance Hall</option>
+  <option value="Trip Hop">Trip Hop</option>
+  
+  <option value="Two Step">Two Step</option>
+  <option value="Dubstep">Dubstep</option>
+
+</select>
+</div>
+
+<div class="genrefilter-container3">
+
+<select id="genreselect3">
+  <option value=""></option>
+  <option value="RnB">RnB</option>
+  <option value="Rock">Rock</option>
+  <option value="Pop">Pop</option>
+  <option value="Hip-Hop">Hip-Hop</option>
+  <option value="Trap">Trap</option>
+  <option value="Electronic">Electronic</option>
+  <option value="Reggae">Reggae</option>
+  <option value="Latin">Latin</option>
+  <option value="Funk/Soul">Funk/Soul</option>
+  <option value="Country">Country</option>
+  <option value="Afro Beat">Afro Beat</option>
+  <option value="Folk">Folk</option>
+  <option value="Blues">Blues</option>
+
+
+  <option value="Boom Bap">Boom Bap</option>
+  <option value="Indie">Indie</option>
+  <option value="Drill">Drill</option>
+  <option value="Lofi">Lofi</option>
+  <option value="Grime">Grime</option>
+  <option value="Metal">Metal</option>
+  <option value="Dance Hall">Dance Hall</option>
+  <option value="Trip Hop">Trip Hop</option>
+  
+  <option value="Two Step">Two Step</option>
+  <option value="Dubstep">Dubstep</option>
+
+</select>
+</div>
+
+<button id="showGenreFilter2" class="show-genre-filter">+</button>
+<button id="showGenreFilter3" class="show-genre-filter2">+</button>
+
+
+
+<script>
+  const showGenreFilter2Button = document.getElementById("showGenreFilter2");
+  const showGenreFilter3Button = document.getElementById("showGenreFilter3");
+  const genreFilter2Container = document.querySelector(".genrefilter-container2");
+  const genreFilter3Container = document.querySelector(".genrefilter-container3");
+  const filteroverlay = document.querySelector(".filteroverlay");
+genreFilter2Container.style.display = "none";
+genreFilter3Container.style.display = "none";
+showGenreFilter3Button.style.display = "none";
+  showGenreFilter2Button.addEventListener("click", function() {
+    genreFilter2Container.style.display = "block";
+    showGenreFilter2Button.style.display = "none";
+    showGenreFilter3Button.style.display = "inline-block";
+    showGenreFilter3Button.style.display = "block";
+  });
+
+  showGenreFilter3Button.addEventListener("click", function() {
+    genreFilter3Container.style.display = "block";
+    showGenreFilter3Button.style.display = "none";
+
+  });
+</script>
+
+<h2 id="keyFilterHeading">Key:</h2>
+<div class="keyfilter-container">
+
+<select id="keyselect">
+  <option value="">All Keys</option>
+  <option value="C">C</option>
+  <option value="Cm">Cm</option>
+  <option value="C#">C#</option>
+  <option value="C#m">C#m</option>
+  <option value="D">D</option>
+  <option value="Dm">Dm</option>
+  <option value="Eb">Eb</option>
+  <option value="Ebm">Ebm</option>
+  <option value="E">E</option>
+  <option value="Em">Em</option>
+  <option value="F">F</option>
+  <option value="F#">F#</option>
+  <option value="Fm">Fm</option>
+  <option value="F#m">F#m</option>
+  <option value="G">G</option>
+  <option value="G#">G#</option>
+  <option value="Gm">Gm</option>
+  <option value="G#m">G#m</option>
+  <option value="A">A</option>
+  <option value="Am">Am</option>
+  <option value="Bb">Bb</option>
+  <option value="Bbm">Bbm</option>
+  <option value="B">B</option>
+  <option value="Bm">Bm</option>
+</select>
+</div>
+</div>
+    <div class="upload-container">
+      <button id="uploadButton">Publish your track</button>
+    </div>
+
+
+
+<div class="auto-record-container">
+<label for="autoRecordCheckbox">Auto record</label>
+<input type="checkbox" id="autoRecordCheckbox">
+</div>
+
+
+
+
+<div class="search-container">
+  <h2 id="seachHeading">Specific Track #: </h2>
+  <label for="search-container"></label>
+  <input type="text" id="trackSearchInput" placeholder="">
+  <button id="searchButton">Search</button>
+  <button id="cancelButton">Cancel</button>
+</div>
+
+
+    <script src="uploadbutton2.js"></script>
+    <script src="timer.js"></script>
+   
+    <script src="filter.js"></script>
+    <script src="chordfilter2.js"></script>
+    <script src="save.js"></script>
+    <script src="autorecord.js"></script>
+
+
+    
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-database.js"></script>
+
+
+
+
+  </body>
+  <script src="firebaseConfig.js"></script>
+</html>
+
+
