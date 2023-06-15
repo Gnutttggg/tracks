@@ -27,7 +27,7 @@ function uploadAudioFile(file) {
 }
 
 function saveTrackInfo(trackData) {
-  const trackRef = database.ref('warehouse').push();
+  const trackRef = database.ref('tracks').push();
   return trackRef.set(trackData)
     .then(() => trackRef.key);
 }
@@ -35,7 +35,7 @@ function saveTrackInfo(trackData) {
 
 function fetchTrackData() {
   const database = firebase.database();
-  const trackRef = database.ref('warehouse');
+  const trackRef = database.ref('tracks');
 
   return trackRef.once('value')
     .then(snapshot => snapshot.val())
@@ -50,7 +50,7 @@ function fetchTrackData() {
 function retrieveTrackInfo(trackId) {
   return new Promise((resolve, reject) => {
     // Assuming you have initialized Firebase and have a reference to your database
-    const trackRef = firebase.database().ref('warehouse/' + trackId);
+    const trackRef = firebase.database().ref('tracks/' + trackId);
     
     trackRef.once('value')
       .then((snapshot) => {
