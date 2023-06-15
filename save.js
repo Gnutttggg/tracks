@@ -7,10 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
  fetchTrackData()
 
 
-    .then((warehouse) => {
+    .then((tracks) => {
       // Iterate over the retrieved track data
-      Object.keys(warehouse).forEach((key) => {
-        const track = warehouse[key];
+      Object.keys(tracks).forEach((key) => {
+        const track = tracks[key];
         
         // Create a new grid item element
         const newGridItem = document.createElement("div");
